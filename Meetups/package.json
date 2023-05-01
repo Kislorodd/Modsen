@@ -1,0 +1,46 @@
+{
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "async-express-router": "^4.0.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "date-and-time": "^2.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.5.0",
+    "jwt-simple": "^0.5.6",
+    "mongoose": "^6.1.5",
+    "multer": "^1.4.4-lts.1",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "pg": "^8.8.0",
+    "sequelize": "^6.12.0-beta.1",
+    "swagger-autogen": "^2.18.4",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "name": "cinemaback",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "swagger-autogen": "node src/swagger/swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qFamouse/CinemaBack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qFamouse/CinemaBack/issues"
+  },
+  "homepage": "https://github.com/qFamouse/CinemaBack#readme",
+  "description": "",
+  "devDependencies": {
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  }
+}

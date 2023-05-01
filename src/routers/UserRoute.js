@@ -1,0 +1,67 @@
+const express = require('express');
+const router = express.Router();
+
+const validate = require('../middleware/Validate');
+const userScheme = require('../schemes/UserScheme');
+
+const isAuthorize = require('../middleware/IsAuthorize');
+
+const userController = require('../controllers/UserController');
+
+const multer = require('multer');
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, callback) {
+            callback(null, '../uploads/avatars');
+        },
+        filename: function (req, file, callback) {
+            callback(null, Date.now() + file.originalname.substring(file.originalname.lastIndexOf('.')));
+        }
+    }),
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter(req, file, callback) {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            callback(null, true);
+        }
+        else {
+            callback(null, false);
+        }
+    }
+});
+
+router.post('/login', validate(userScheme.login), userController.Login
+    /*
+    #swagger.tags = ['Users']
+    */);
+router.post('/register', validate(userScheme.create), userController.Register
+    /*
+    #swagger.tags = ['Users']
+    */);
+router.use(isAuthorize);
+router.get('/', userController.GetAll
+    /*
+    #swagger.tags = ['Users']
+    #swagger.security = [{ "bearerAuth": [] }]
+    */);
+
+router.get('/user', userController.GetCurrentUser)
+router.patch('/update', validate(userScheme.edit), userController.UpdateCurrentUser)
+router.get('/:id', userController.GetById
+    /*
+    #swagger.tags = ['Users']
+    #swagger.security = [{ "bearerAuth": [] }]
+    */);
+router.patch('/:id', validate(userScheme.edit), userController.EditById
+    /*
+    #swagger.tags = ['Users']
+    #swagger.security = [{ "bearerAuth": [] }]
+    */);
+router.delete('/:id', userController.DeleteById
+    /*
+    #swagger.tags = ['Users']
+    #swagger.security = [{ "bearerAuth": [] }]
+    */);
+
+module.exports = router;
